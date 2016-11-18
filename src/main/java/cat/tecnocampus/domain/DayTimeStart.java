@@ -1,5 +1,8 @@
 package cat.tecnocampus.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
@@ -8,6 +11,7 @@ import java.time.LocalTime;
  * Created by roure on 18/11/2016.
  */
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class DayTimeStart {
 
     @Id
@@ -15,6 +19,7 @@ public class DayTimeStart {
     @Column(name = "DAYTIME_ID")
     private long id;
 
+    @JsonFormat(pattern = "HH:mm:ss")
     private LocalTime begin;
 
     private DayOfWeek dayOfWeek;

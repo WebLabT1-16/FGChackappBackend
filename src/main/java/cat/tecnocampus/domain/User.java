@@ -1,5 +1,7 @@
 package cat.tecnocampus.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -8,6 +10,7 @@ import java.util.List;
 /**
  * Created by roure on 14/11/2016.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"email"})})
 public class User implements Serializable {
