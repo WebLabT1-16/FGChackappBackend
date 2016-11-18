@@ -8,7 +8,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 /**
  * Created by roure on 14/11/2016.
  */
-@RepositoryRestResource//(tokenProjection = TokenProjection.class)
 public interface UserRepository extends JpaRepository<User,String> {
 
     User findByEmail(@Param("email") String email);
