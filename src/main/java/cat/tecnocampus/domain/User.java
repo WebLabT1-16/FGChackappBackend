@@ -32,11 +32,11 @@ public class User implements Serializable {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID", nullable = false)
-    private List<FavoriteJourney> favoriteJourneyList;
+    public List<FavoriteJourney> favoriteJourneyList;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "COMMUTER_ID", referencedColumnName = "USER_ID", nullable = false)
-    private List<Ride> rideList;
+    public List<Ride> rideList;
 
     public User() {
        favoriteJourneyList = new ArrayList<>();

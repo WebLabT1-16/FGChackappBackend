@@ -1,6 +1,7 @@
 package cat.tecnocampus.restControllers;
 
 import cat.tecnocampus.domain.FavoriteJourney;
+import cat.tecnocampus.domain.Journey;
 import cat.tecnocampus.domain.User;
 import cat.tecnocampus.repositories.FavoriteJourneyRepository;
 import cat.tecnocampus.repositories.JourneyRepository;
@@ -10,6 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by roure on 18/11/2016.
@@ -39,9 +43,21 @@ public class userController {
     }
 
     @PutMapping("/users/{username}/favoriteJourney")
-    public void putFavoriteJourney(@PathVariable String username, @RequestBody FavoriteJourney favoriteJourney) {
+    public FavoriteJourney putFavoriteJourney(@PathVariable String username, @RequestBody FavoriteJourney favoriteJourney) {
+
+        //check whether journey already exists
+        Journey journey = favoriteJourney.getJourney();
+        Journey storedJourney = journeyRepository.findByOriginAndDestination(journey.getOrigin().getNom(), journey.getDestination().getNom());
+        if (storedJourney != null) favoriteJourney.getJourney().setId(storedJourney.getId());
         User user = userRepository.findOne(username);
-        System.out.println(user.getFavoriteJourneyList().get(0).toString());
-        System.out.println("favoriteJourney: " + favoriteJourney);
+
+        List<FavoriteJourney> list = new ArrayList<>();
+        list.add(favoriteJourney);
+
+        user.setFavoriteJourneyList(list);
+
+        userRepository.save(user);
+
+        return favoriteJourney;
     }
 }

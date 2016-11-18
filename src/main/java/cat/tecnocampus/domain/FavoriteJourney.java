@@ -22,7 +22,7 @@ public class FavoriteJourney {
     @JoinColumn(name = "FAVORITE_JOURNEY_ID", referencedColumnName = "FAVORITE_JOURNEY_ID", nullable = false)
     private List<DayTimeStart> StartList;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "JOURNEY")
     private Journey journey;
 

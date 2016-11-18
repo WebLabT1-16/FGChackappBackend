@@ -16,11 +16,11 @@ public class Journey {
     @Column(name = "JOURNEY_ID")
     private long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ORIGIN")
     private Station origin;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "DESTINATION")
     private Station destination;
 
